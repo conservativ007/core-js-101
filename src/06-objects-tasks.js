@@ -20,8 +20,13 @@
  *    console.log(r.height);      // => 20
  *    console.log(r.getArea());   // => 200
  */
-function Rectangle(/* width, height */) {
-  throw new Error('Not implemented');
+function Rectangle(width, height) {
+  this.width = width;
+  this.height = height;
+
+  Rectangle.prototype.getArea = function getArea() {
+    return this.width * this.height;
+  };
 }
 
 
@@ -35,8 +40,8 @@ function Rectangle(/* width, height */) {
  *    [1,2,3]   =>  '[1,2,3]'
  *    { width: 10, height : 20 } => '{"height":10,"width":20}'
  */
-function getJSON(/* obj */) {
-  throw new Error('Not implemented');
+function getJSON(obj) {
+  return JSON.stringify(obj);
 }
 
 
@@ -115,12 +120,14 @@ const cssSelectorBuilder = {
     throw new Error('Not implemented');
   },
 
-  id(/* value */) {
-    throw new Error('Not implemented');
+  id(value) {
+    this.value = `#${value}`;
+    return this;
   },
 
-  class(/* value */) {
-    throw new Error('Not implemented');
+  class(value) {
+    this.value = `${this.value}.${value}`;
+    return this;
   },
 
   attr(/* value */) {
@@ -137,6 +144,10 @@ const cssSelectorBuilder = {
 
   combine(/* selector1, combinator, selector2 */) {
     throw new Error('Not implemented');
+  },
+
+  stringify() {
+    // return FSON.stringify(this.value);
   },
 };
 
